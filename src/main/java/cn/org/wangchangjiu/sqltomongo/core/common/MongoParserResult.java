@@ -2,7 +2,7 @@ package cn.org.wangchangjiu.sqltomongo.core.common;
 
 import lombok.Data;
 import org.bson.Document;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -20,6 +20,15 @@ public class MongoParserResult {
        this.collectionName = collectionName;
    }
 
+   public String toJson(){
+       StringBuilder sb = new StringBuilder("[");
+       if(!CollectionUtils.isEmpty(this.documents)){
+           this.documents.stream().forEach(doc -> sb.append(doc.toJson()).append(","));
+       }
+       sb.deleteCharAt(sb.lastIndexOf(","));
+       sb.append("]");
+       return sb.toString();
+   }
 
 
 }

@@ -26,7 +26,7 @@ public class SqltomongoCoreApplication {
         MongoParserResult mongoParserResult = selectSQLTypeParser.mongoAggregationAnalyzer(parserData);
 
 
-        System.out.println("-=================");
+        System.out.println(mongoParserResult.toJson());
 
     }
 

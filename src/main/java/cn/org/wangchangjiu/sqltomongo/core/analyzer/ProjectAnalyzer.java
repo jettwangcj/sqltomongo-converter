@@ -5,10 +5,6 @@ import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.ProjectData;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.aggregation.Field;
-import org.springframework.data.mongodb.core.aggregation.Fields;
 
 import java.util.ArrayList;
 import java.util.List;

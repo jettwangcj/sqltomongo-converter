@@ -4,9 +4,6 @@ import cn.org.wangchangjiu.sqltomongo.core.parser.data.LookUpData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.MatchData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
 import org.bson.Document;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;

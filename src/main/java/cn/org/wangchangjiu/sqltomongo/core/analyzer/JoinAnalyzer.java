@@ -5,7 +5,6 @@ import cn.org.wangchangjiu.sqltomongo.core.expand.PipelineCriteria;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.LookUpData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
 import org.bson.Document;
-import org.springframework.data.mongodb.core.aggregation.MatchOperation;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;

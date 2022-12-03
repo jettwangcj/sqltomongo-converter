@@ -6,13 +6,10 @@ import cn.org.wangchangjiu.sqltomongo.core.common.MongoParserResult;
 import cn.org.wangchangjiu.sqltomongo.core.common.ParserPartTypeEnum;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
 import cn.org.wangchangjiu.sqltomongo.core.util.SqlCommonUtil;
-import com.alibaba.fastjson.JSON;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bson.Document;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 
 import java.util.ArrayList;
 import java.util.List;

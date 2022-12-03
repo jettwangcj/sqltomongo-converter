@@ -1,7 +1,6 @@
 package cn.org.wangchangjiu.sqltomongo.core.expand;
 
 import org.bson.Document;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;

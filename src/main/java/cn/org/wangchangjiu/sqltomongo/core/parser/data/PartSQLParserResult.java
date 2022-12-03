@@ -1,7 +1,7 @@
 package cn.org.wangchangjiu.sqltomongo.core.parser.data;
 
+import cn.org.wangchangjiu.sqltomongo.core.common.ParserPartTypeEnum;
 import lombok.Data;
-import org.sqltomongo.common.ParserPartTypeEnum;
 
 import java.util.List;
 
