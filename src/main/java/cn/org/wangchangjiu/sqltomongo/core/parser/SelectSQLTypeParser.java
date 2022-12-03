@@ -2,6 +2,7 @@ package cn.org.wangchangjiu.sqltomongo.core.parser;
 
 import cn.org.wangchangjiu.sqltomongo.core.analyzer.Analyzer;
 import cn.org.wangchangjiu.sqltomongo.core.analyzer.AnalyzerBuilder;
+import cn.org.wangchangjiu.sqltomongo.core.analyzer.DefaultAnalyzerBuilder;
 import cn.org.wangchangjiu.sqltomongo.core.common.MongoParserResult;
 import cn.org.wangchangjiu.sqltomongo.core.common.ParserPartTypeEnum;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
@@ -55,12 +56,18 @@ public class SelectSQLTypeParser {
         Analyzer analyzer = analyzerBuilder.newAnalyzerInstance();
         analyzer.setAnalyzerBuilder(analyzerBuilder);
         analyzer.analysis(documents, data);
-
-       /* Aggregation aggregation = Aggregation.newAggregation(operations);
-        if (logger.isInfoEnabled()) {
-            logger.info("build Aggregation : " + JSON.toJSONString(aggregation));
-        }*/
         return new MongoParserResult(documents, data.getMajorTable());
     }
 
+    /**
+     *  使用默认解析器/分析器转化SQL
+     * @param sql
+     * @return
+     */
+    public static String defaultConverter(String sql) {
+        SelectSQLTypeParser selectSQLTypeParser = new SelectSQLTypeParser(new DefaultPartSQLParserBuilder(), new DefaultAnalyzerBuilder());
+        PartSQLParserData parserData = selectSQLTypeParser.getPartSQLParserData(sql);
+        MongoParserResult mongoParserResult = selectSQLTypeParser.mongoAggregationAnalyzer(parserData);
+        return mongoParserResult.toJson();
+    }
 }
