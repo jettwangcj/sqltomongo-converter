@@ -33,10 +33,7 @@ public class MyJoinExpressionVisitorAdapter extends BaseExpressionVisitorAdapter
         Expression leftExpression = equalsTo.getLeftExpression();
         Expression rightExpression = equalsTo.getRightExpression();
 
-      //  ConversionFunction function = null;
         Column left , right;
-      //  String conversionField = null;
-
         leftExpression.accept(this);
         rightExpression.accept(this);
         LookUpData.Let let = new LookUpData.Let();
@@ -47,12 +44,9 @@ public class MyJoinExpressionVisitorAdapter extends BaseExpressionVisitorAdapter
 
             SqlSupportedSyntaxCheckUtil.checkTableAssociationSupportedFunction(leftFunction);
 
-          //  function = ConversionFunction.parser(leftFunction.getName());
             let.setFunction(ConversionFunction.parser(leftFunction.getName()));
             left = Column.class.cast(leftFunction.getParameters().getExpressions().get(0));
             let.setConversionField(left.getColumnName());
-           // conversionField = left.getColumnName();
-            // conversionFieldTable = left.getTable().getName();
         } else {
             left = Column.class.cast(leftExpression);
         }
@@ -62,21 +56,12 @@ public class MyJoinExpressionVisitorAdapter extends BaseExpressionVisitorAdapter
             Function rightFunction = Function.class.cast(rightExpression);
             // 检查支持的函数 因为 JOIN 函数支持 类型转换函数 检查有多个参数报错或者没有参数报错
             SqlSupportedSyntaxCheckUtil.checkTableAssociationSupportedFunction(rightFunction);
-           // function = ConversionFunction.parser(rightFunction.getName());
             let.setFunction(ConversionFunction.parser(rightFunction.getName()));
             right = Column.class.cast(rightFunction.getParameters().getExpressions().get(0));
-           // conversionField = right.getColumnName();
             let.setConversionField(right.getColumnName());
         } else {
             right = Column.class.cast(rightExpression);
         }
-
-       // String localField = null, foreignField = null ;
-
-      /*  if(data.getAlias().equalsIgnoreCase(conversionFieldTable)){
-            // 函数发生在被关联表时，不支持
-            throw new SqlParserException("语法错误，表关联时，objectId、string转换函数需要作用在主表中");
-        }*/
 
         if(!StringUtils.isEmpty(data.getAlias())){
             // 关联表
@@ -88,17 +73,11 @@ public class MyJoinExpressionVisitorAdapter extends BaseExpressionVisitorAdapter
                 // 使用主表关联  localField: 源集合中的match值 ,bookListId, foreignField: 待Join的集合的match值 id
                 // 源集合 就是主表
                 if(data.getAlias().equals(leftTableName)){
-
-                   /* foreignField = left.getColumnName();
-                    localField = right.getColumnName();*/
-
                     let.setLocalField(right.getColumnName());
                     let.setForeignField(left.getColumnName());
                     let.setFieldAlias("temp_".concat(let.getLocalField()));
 
                 } else if(data.getAlias().equals(rightTableName)){
-                  /*  foreignField = right.getColumnName();
-                    localField = left.getColumnName() ;*/
                     let.setLocalField(left.getColumnName());
                     let.setForeignField(right.getColumnName());
                     let.setFieldAlias("temp_".concat(let.getLocalField()));
@@ -121,18 +100,12 @@ public class MyJoinExpressionVisitorAdapter extends BaseExpressionVisitorAdapter
             }
         } else {
             // 没有别名 按照默认习惯  主键在前，外键在后
-            /*localField = left.getColumnName();
-            foreignField = right.getColumnName();*/
             let.setLocalField(left.getColumnName());
             let.setForeignField(right.getColumnName());
             let.setFieldAlias("temp_".concat(let.getLocalField()));
         }
 
         data.setLet(let);
-      /*  data.setLocalField(localField);
-        data.setForeignField(foreignField);
-        data.setFunction(function);
-        data.setConversionField(conversionField);*/
         data.setAs("tmp_".concat(data.getTable()));
 
     }

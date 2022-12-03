@@ -48,14 +48,6 @@ public class SqlSupportedSyntaxCheckUtil {
     }
 
     /**
-     *  检查是否有子查询 暂时不支持 子查询
-     * @param rightItem
-     */
-    public static void checkSubSelect(FromItem rightItem){
-
-    }
-
-    /**
      *  检查 函数不可以嵌套
      * @param expressions
      */

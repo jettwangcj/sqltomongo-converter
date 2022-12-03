@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 /**
- * @Classname MyJoinExpressionVisitorAdapter
+ * @Classname MySelectExpressionVisitorAdapter
  * @Description
  * @Date 2022/11/24 15:24
  * @Created by wangchangjiu

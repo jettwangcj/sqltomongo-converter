@@ -12,7 +12,7 @@ import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.SubSelect;
 
 /**
- * @Classname ExpressionVisitorAdapter
+ * @Classname BaseExpressionVisitorAdapter
  * @Description
  * @Date 2022/11/24 17:45
  * @Created by wangchangjiu

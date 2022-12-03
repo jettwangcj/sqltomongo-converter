@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class HavingSQLParser extends AbstractPartSQLParser {
 
-    public List<MatchData> parser(Expression having) {
+    private List<MatchData> parser(Expression having) {
         if (ObjectUtils.isNotEmpty(having)) {
             List<MatchData> matchData = new ArrayList<>();
             having.accept(new MyExpressionVisitorAdapter(ParserPartTypeEnum.HAVING, matchData));
