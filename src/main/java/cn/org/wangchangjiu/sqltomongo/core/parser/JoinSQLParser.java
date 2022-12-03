@@ -23,6 +23,7 @@ public class JoinSQLParser extends AbstractPartSQLParser  {
             for (Join join : joins) {
                 FromItem rightItem = join.getRightItem();
                 LookUpData data = new LookUpData();
+                data.setJoinType(join.isLeft() ? LookUpData.JoinType.LEFT_JOIN : join.isInner() ? LookUpData.JoinType.INNER_JOIN : null);
                 rightItem.accept(new MyFromItemVisitorAdapter(data, join,
                         StringUtils.isEmpty(partSQLParserData.getMajorTableAlias()) ?
                                 partSQLParserData.getMajorTable() : partSQLParserData.getMajorTableAlias(),

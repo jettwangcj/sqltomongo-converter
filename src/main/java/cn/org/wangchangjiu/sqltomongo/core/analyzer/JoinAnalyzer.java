@@ -57,24 +57,8 @@ public class JoinAnalyzer extends AbstractAnalyzer {
                             .as(join.getAlias());
 
                     documents.add(pipelinesDocument.toDocument());
-
                     // 展平
-
-                   /* if (!preserveNullAndEmptyArrays && arrayIndex == null) {
-                        return new Document(getOperator(), path);
-                    }
-
-                    Document unwindArgs = new Document();
-                    unwindArgs.put("path", path);
-                    if (arrayIndex != null) {
-                        unwindArgs.put("includeArrayIndex", arrayIndex.getName());
-                    }
-                    unwindArgs.put("preserveNullAndEmptyArrays", preserveNullAndEmptyArrays);
-
-                    return new Document(getOperator(), unwindArgs);*/
-
-                  //  documents.add(Aggregation.unwind(join.getAs(), true));
-
+                    documents.add(buildUnwind(join));
                 } else {
                     // 处理关联表是一个 单表
                     LookUpData.Let letData = join.getLet();
@@ -85,12 +69,22 @@ public class JoinAnalyzer extends AbstractAnalyzer {
                             .pipeline(Arrays.asList(buildRelationMatch(letData)))
                             .as(join.getAs());
                     documents.add(pipelinesDocument.toDocument());
-
-                   // documents.add(Aggregation.unwind(join.getAs(), true));
+                    // 展平
+                    documents.add(buildUnwind(join));
                 }
             });
         }
         return documents;
+    }
+
+    private Document buildUnwind(LookUpData join){
+        if (join.getJoinType() == null) {
+            return new Document("$unwind", join.getAs());
+        }
+        Document unwindArgs = new Document();
+        unwindArgs.put("path", join.getAs());
+        unwindArgs.put("preserveNullAndEmptyArrays", join.getJoinType() == LookUpData.JoinType.LEFT_JOIN);
+        return new Document("$unwind", unwindArgs);
     }
 
     private Document buildRelationMatch(LookUpData.Let letData) {

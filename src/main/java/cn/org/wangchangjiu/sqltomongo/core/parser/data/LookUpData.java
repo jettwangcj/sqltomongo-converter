@@ -20,14 +20,13 @@ public class LookUpData implements Serializable {
      *  连接表别名
      */
     private String alias;
-  /*  *//**
-     *  作为连接参照的本表字段
-     *//*
-    private String localField;
-    *//**
-     *  作为连接参照的目标表字段
-     *//*
-    private String foreignField;*/
+
+    /**
+     *  join 类型
+     */
+    private JoinType joinType;
+
+
     /**
      *  当连接查询查询出来之后，外表的查询结果
      */
@@ -44,6 +43,17 @@ public class LookUpData implements Serializable {
      *  子查询数据
      */
     private PartSQLParserData partSQLParserData;
+
+    /**
+     *  join 类型
+     */
+    public enum JoinType {
+
+        LEFT_JOIN,
+
+        INNER_JOIN
+
+    }
 
     @Data
     public static class Let {
