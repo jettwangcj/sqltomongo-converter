@@ -82,7 +82,7 @@ public class JoinAnalyzer extends AbstractAnalyzer {
             return new Document("$unwind", join.getAs());
         }
         Document unwindArgs = new Document();
-        unwindArgs.put("path", join.getAs());
+        unwindArgs.put("path", "$".concat(join.getAs()));
         unwindArgs.put("preserveNullAndEmptyArrays", join.getJoinType() == LookUpData.JoinType.LEFT_JOIN);
         return new Document("$unwind", unwindArgs);
     }

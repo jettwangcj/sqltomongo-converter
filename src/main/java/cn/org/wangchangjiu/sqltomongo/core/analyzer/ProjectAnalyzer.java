@@ -67,7 +67,7 @@ public class ProjectAnalyzer extends AbstractAnalyzer {
 
             } else {
                 // 没有 字段携带的 就是单表
-                fieldObject.append(project.getAlias(), project.getField());
+                fieldObject.append(project.getAlias(), "$".concat(project.getField()));
             }
         });
         documents.add(new Document("$project", fieldObject));
