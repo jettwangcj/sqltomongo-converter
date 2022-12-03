@@ -26,8 +26,8 @@
     </developers>
 
     <scm>
-        <url>https://gitee.com/listen_w/sqltomongo-spring-boot-starter</url>
-        <connection>https://gitee.com/listen_w/sqltomongo-spring-boot-starter.git</connection>
+        <url>https://gitee.com/listen_w/sqltomongo-converter</url>
+        <connection>https://gitee.com/listen_w/sqltomongo-converter.git</connection>
     </scm>
 
     <distributionManagement>
