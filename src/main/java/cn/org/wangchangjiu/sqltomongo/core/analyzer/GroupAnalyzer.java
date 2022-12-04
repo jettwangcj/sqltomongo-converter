@@ -73,32 +73,33 @@ public class GroupAnalyzer extends AbstractAnalyzer {
      */
     private static Document analysisGroup(List<ProjectData> projectData, List<GroupData> groupData, Map<String, LookUpData> lookUpDataMap) {
 
-        if (!CollectionUtils.isEmpty(groupData)) {
+        List<ProjectData> functionProjectData = projectData.stream().filter(item -> ObjectUtils.isNotEmpty(item.getFunction())).collect(Collectors.toList());
 
-            List<ProjectData> functionProjectData = projectData.stream().filter(item -> ObjectUtils.isNotEmpty(item.getFunction())).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(groupData) || !CollectionUtils.isEmpty(functionProjectData)) {
 
             Map<AggregationFunction, List<ProjectData>> functionProjectDataMap = new HashMap<>();
             if (!CollectionUtils.isEmpty(functionProjectData)) {
                 functionProjectDataMap.putAll(functionProjectData.stream().collect(Collectors.groupingBy(ProjectData::getFunction)));
             }
 
-            Document fieldsDoc = new Document();
-            groupData.stream().forEach(group -> {
-
-                String field = group.getField();
-
-                if (StringUtils.isNotEmpty(group.getTableAlias())) {
-                    // 被关联的表 需要有 结果集 as 的前缀
-                    LookUpData lookUpData = lookUpDataMap.get(group.getTableAlias());
-                    if (ObjectUtils.isNotEmpty(lookUpData)) {
-                        field = lookUpData.getAs().concat(".").concat(field);
-                    }
-                }
-                fieldsDoc.append(field, "$".concat(field));
-            });
-
             Document groupDoc = new Document();
-            groupDoc.append("_id", fieldsDoc);
+            if(!CollectionUtils.isEmpty(groupData)){
+                Document fieldsDoc = new Document();
+                groupData.stream().forEach(group -> {
+                    String field = group.getField();
+                    if (StringUtils.isNotEmpty(group.getTableAlias())) {
+                        // 被关联的表 需要有 结果集 as 的前缀
+                        LookUpData lookUpData = lookUpDataMap.get(group.getTableAlias());
+                        if (ObjectUtils.isNotEmpty(lookUpData)) {
+                            field = lookUpData.getAs().concat(".").concat(field);
+                        }
+                    }
+                    fieldsDoc.append(field, "$".concat(field));
+                });
+                groupDoc.append("_id", fieldsDoc);
+            } else {
+                groupDoc.append("_id", null);
+            }
 
             functionProjectDataMap.forEach((function, projectDataList) -> {
                 if (AggregationFunction.SUM == function) {
