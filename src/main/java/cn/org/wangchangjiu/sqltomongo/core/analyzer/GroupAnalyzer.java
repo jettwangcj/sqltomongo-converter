@@ -105,6 +105,9 @@ public class GroupAnalyzer extends AbstractAnalyzer {
                 if (AggregationFunction.SUM == function) {
                     // 求和
                     handleAggregationFunction(lookUpDataMap, projectDataList, (field, alias) -> groupDoc.append(alias, new Document("$sum", "$".concat(field))));
+                } else if(AggregationFunction.COUNT == function){
+                    // count 统计
+                    handleAggregationFunction(lookUpDataMap, projectDataList, (field, alias) -> groupDoc.append(alias, new Document("$sum", 1)));
                 } else if (AggregationFunction.AVG == function) {
                     // 求平均
                     handleAggregationFunction(lookUpDataMap, projectDataList, (field, alias) ->  groupDoc.append(alias, new Document("$avg", "$".concat(field))));
