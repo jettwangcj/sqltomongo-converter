@@ -55,14 +55,14 @@ public class ProjectAnalyzer extends AbstractAnalyzer {
                 String table = project.getTable();
                 if (table.equals(majorTableAlias)) {
                     // 主表投影
-                    fieldObject.append(project.getAlias(), project.getField());
+                    fieldObject.append(project.getAlias(), "$".concat(project.getField()));
 
                 } else {
 
                     // 被关联表 需要携带 as （被关联表数据集）
                     LookUpData lookUpData = lookUpDataMap.get(project.getTable());
                     String target = lookUpData == null ? project.getField() : lookUpData.getAs().concat(".").concat(project.getField());
-                    fieldObject.append(project.getField(), target);
+                    fieldObject.append(project.getField(), "$".concat(target));
                 }
 
             } else {
