@@ -7,6 +7,7 @@
     <version>1.0.0-RELEASE</version>
     <name>sqltomongo-converter</name>
     <description>sql to mongo converter</description>
+    <url>https://gitee.com/listen_w/sqltomongo-converter</url>
 
     <licenses>
         <license>
