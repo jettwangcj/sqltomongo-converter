@@ -64,10 +64,22 @@ public class SelectSQLTypeParser {
      * @param sql
      * @return
      */
-    public static String defaultConverter(String sql) {
+    public static String defaultConverterToString(String sql) {
         SelectSQLTypeParser selectSQLTypeParser = new SelectSQLTypeParser(new DefaultPartSQLParserBuilder(), new DefaultAnalyzerBuilder());
         PartSQLParserData parserData = selectSQLTypeParser.getPartSQLParserData(sql);
         MongoParserResult mongoParserResult = selectSQLTypeParser.mongoAggregationAnalyzer(parserData);
         return mongoParserResult.toJson();
+    }
+
+    /**
+     *  使用默认解析器/分析器转化SQL
+     * @param sql
+     * @return
+     */
+    public static MongoParserResult defaultConverterResult(String sql) {
+        SelectSQLTypeParser selectSQLTypeParser = new SelectSQLTypeParser(new DefaultPartSQLParserBuilder(), new DefaultAnalyzerBuilder());
+        PartSQLParserData parserData = selectSQLTypeParser.getPartSQLParserData(sql);
+        MongoParserResult mongoParserResult = selectSQLTypeParser.mongoAggregationAnalyzer(parserData);
+        return mongoParserResult;
     }
 }
