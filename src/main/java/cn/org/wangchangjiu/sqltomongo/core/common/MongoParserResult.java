@@ -30,5 +30,8 @@ public class MongoParserResult {
        return sb.toString();
    }
 
+    public String formatCommand(){
+        return String.format("{ aggregate:\"%s\", pipeline:%s, maxTimeMS: 10000, cursor: {}}", this.getCollectionName(), this.toJson());
+    }
 
 }
