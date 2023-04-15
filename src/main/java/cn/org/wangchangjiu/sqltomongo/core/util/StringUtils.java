@@ -1,8 +1,6 @@
 package cn.org.wangchangjiu.sqltomongo.core.util;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -10,8 +8,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
-
-    private static final Logger logger = LoggerFactory.getLogger(StringUtils.class);
 
     public static final String DEFAULT_ENCODING = "UTF-8";
 
@@ -39,14 +35,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             messageDigest.reset();
             messageDigest.update(str.getBytes(encoding));
         } catch (NoSuchAlgorithmException e) {
-            if (logger.isErrorEnabled()) {
-                logger.error("MD5 algorithm not supported", e);
-            }
             return str;
         } catch (UnsupportedEncodingException e) {
-            if (logger.isErrorEnabled()) {
-                logger.error(formatMessage("Encoding \"{0}\" not supported for MD5 algorithm.", DEFAULT_ENCODING), e);
-            }
             return str;
         }
 

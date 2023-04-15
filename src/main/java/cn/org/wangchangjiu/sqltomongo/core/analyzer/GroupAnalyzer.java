@@ -2,10 +2,10 @@ package cn.org.wangchangjiu.sqltomongo.core.analyzer;
 
 import cn.org.wangchangjiu.sqltomongo.core.common.AggregationFunction;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.*;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
-import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.function.BiConsumer;

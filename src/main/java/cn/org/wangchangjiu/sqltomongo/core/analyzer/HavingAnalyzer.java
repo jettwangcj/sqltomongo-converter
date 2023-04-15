@@ -3,8 +3,8 @@ package cn.org.wangchangjiu.sqltomongo.core.analyzer;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.LookUpData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.MatchData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
+import org.apache.commons.collections4.CollectionUtils;
 import org.bson.Document;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;

@@ -2,8 +2,8 @@ package cn.org.wangchangjiu.sqltomongo.core.analyzer;
 
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.SortData;
+import org.apache.commons.collections4.CollectionUtils;
 import org.bson.Document;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 

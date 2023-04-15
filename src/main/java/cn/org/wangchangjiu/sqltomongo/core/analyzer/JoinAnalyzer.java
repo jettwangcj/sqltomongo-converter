@@ -4,8 +4,8 @@ import cn.org.wangchangjiu.sqltomongo.core.expand.LookupLetPipelinesDocument;
 import cn.org.wangchangjiu.sqltomongo.core.expand.PipelineCriteria;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.LookUpData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
+import org.apache.commons.collections4.CollectionUtils;
 import org.bson.Document;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

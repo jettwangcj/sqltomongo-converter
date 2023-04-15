@@ -18,7 +18,6 @@ import net.sf.jsqlparser.statement.select.SubSelect;
  * @Date 2022/11/23 17:30
  * @Created by wangchangjiu
  */
-@Slf4j
 public class MyFromItemVisitorAdapter extends FromItemVisitorAdapter {
 
     private final LookUpData data;

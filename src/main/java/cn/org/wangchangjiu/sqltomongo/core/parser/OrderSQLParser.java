@@ -5,7 +5,7 @@ import cn.org.wangchangjiu.sqltomongo.core.parser.data.PartSQLParserData;
 import cn.org.wangchangjiu.sqltomongo.core.parser.data.SortData;
 import net.sf.jsqlparser.statement.select.OrderByElement;
 import net.sf.jsqlparser.statement.select.PlainSelect;
-import org.springframework.util.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package cn.org.wangchangjiu.sqltomongo.core.common;
 
 import lombok.Data;
+import org.apache.commons.collections4.CollectionUtils;
 import org.bson.Document;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
