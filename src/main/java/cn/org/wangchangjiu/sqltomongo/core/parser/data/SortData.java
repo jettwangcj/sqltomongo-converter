@@ -23,5 +23,8 @@ public class SortData implements Serializable {
 
     public SortData(){}
 
-    public SortData(SortDirection direction, String field){}
+    public SortData(SortDirection direction, String field){
+        this.direction = direction;
+        this.field = field;
+    }
 }

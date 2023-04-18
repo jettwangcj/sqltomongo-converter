@@ -50,25 +50,34 @@ public class ProjectAnalyzer extends AbstractAnalyzer {
 
         Document fieldObject = new Document();
         projectData.stream().forEach(project -> {
-            // 字段携带表别名 例如 select t1.id,t2.name from
-            if (StringUtils.isNotEmpty(project.getTable())) {
-                String table = project.getTable();
-                if (table.equals(majorTableAlias)) {
-                    // 主表投影
-                    fieldObject.append(project.getAlias(), "$".concat(project.getField()));
+
+            if(project.getFunction() != null){
+                fieldObject.append(project.getAlias(), "$".concat(project.getAlias()));
+            } else {
+
+                // 字段携带表别名 例如 select t1.id,t2.name from
+                if (StringUtils.isNotEmpty(project.getTable())) {
+                    String table = project.getTable();
+                    if (table.equals(majorTableAlias)) {
+                        // 主表投影
+                        fieldObject.append(project.getAlias(), "$".concat(project.getField()));
+
+                    } else {
+
+                        // 被关联表 需要携带 as （被关联表数据集）
+                        LookUpData lookUpData = lookUpDataMap.get(project.getTable());
+                        String target = lookUpData == null ? project.getField() : lookUpData.getAs().concat(".").concat(project.getField());
+                        fieldObject.append(project.getField(), "$".concat(target));
+                    }
 
                 } else {
-
-                    // 被关联表 需要携带 as （被关联表数据集）
-                    LookUpData lookUpData = lookUpDataMap.get(project.getTable());
-                    String target = lookUpData == null ? project.getField() : lookUpData.getAs().concat(".").concat(project.getField());
-                    fieldObject.append(project.getField(), "$".concat(target));
+                    // 没有 字段携带的 就是单表
+                    fieldObject.append(project.getAlias(), "$".concat(project.getField()));
                 }
 
-            } else {
-                // 没有 字段携带的 就是单表
-                fieldObject.append(project.getAlias(), "$".concat(project.getField()));
             }
+
+
         });
         documents.add(new Document("$project", fieldObject));
         return documents;

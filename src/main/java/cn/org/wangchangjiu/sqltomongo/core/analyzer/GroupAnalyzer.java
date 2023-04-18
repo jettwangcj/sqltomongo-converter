@@ -59,7 +59,7 @@ public class GroupAnalyzer extends AbstractAnalyzer {
         if (!CollectionUtils.isEmpty(groupData) && groupData.size() == 1) {
             String field = groupData.get(0).getField();
             projectData.stream().filter(project -> field.equals(project.getField())).findFirst()
-                    .ifPresent(project -> project.setField("_id"));
+                    .ifPresent(project -> project.setField("_id.".concat(field)));
         }
     }
 
@@ -142,7 +142,7 @@ public class GroupAnalyzer extends AbstractAnalyzer {
                     field = lookUpData.getAs().concat(".").concat(field);
                 }
             }
-            groupOperationBiConsumer.accept(field, field);
+            groupOperationBiConsumer.accept(field, project.getAlias());
         });
     }
 
