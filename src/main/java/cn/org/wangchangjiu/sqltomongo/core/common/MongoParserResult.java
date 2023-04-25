@@ -20,7 +20,7 @@ public class MongoParserResult {
        this.collectionName = collectionName;
    }
 
-   public String toJson(){
+   private String toJson(){
        StringBuilder sb = new StringBuilder("[");
        if(!CollectionUtils.isEmpty(this.documents)){
            this.documents.stream().forEach(doc -> sb.append(doc.toJson()).append(","));
@@ -29,6 +29,11 @@ public class MongoParserResult {
        sb.append("]");
        return sb.toString();
    }
+
+    public String toJsonString(){
+        String json = this.toJson();
+        return String.format("db.%s.aggregate(%s)", collectionName,json);
+    }
 
     public String formatCommand(){
         return String.format("{ aggregate:\"%s\", pipeline:%s, maxTimeMS: 10000, cursor: {}}", this.getCollectionName(), this.toJson());

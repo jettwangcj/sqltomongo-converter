@@ -68,7 +68,7 @@ public class SelectSQLTypeParser {
         SelectSQLTypeParser selectSQLTypeParser = new SelectSQLTypeParser(new DefaultPartSQLParserBuilder(), new DefaultAnalyzerBuilder());
         PartSQLParserData parserData = selectSQLTypeParser.getPartSQLParserData(sql);
         MongoParserResult mongoParserResult = selectSQLTypeParser.mongoAggregationAnalyzer(parserData);
-        return mongoParserResult.toJson();
+        return mongoParserResult.toJsonString();
     }
 
     /**
