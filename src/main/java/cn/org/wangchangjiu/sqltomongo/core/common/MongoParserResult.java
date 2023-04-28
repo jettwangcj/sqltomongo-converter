@@ -20,7 +20,11 @@ public class MongoParserResult {
        this.collectionName = collectionName;
    }
 
-   private String toJson(){
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public String toJson(){
        StringBuilder sb = new StringBuilder("[");
        if(!CollectionUtils.isEmpty(this.documents)){
            this.documents.stream().forEach(doc -> sb.append(doc.toJson()).append(","));
